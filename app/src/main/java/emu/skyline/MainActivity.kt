@@ -41,6 +41,7 @@ import emu.skyline.provider.DocumentsProvider
 import emu.skyline.settings.AppSettings
 import emu.skyline.settings.EmulationSettings
 import emu.skyline.settings.SettingsActivity
+import emu.skyline.utils.DocumentFileWatcher
 import emu.skyline.utils.GpuDriverHelper
 import emu.skyline.utils.WindowInsetsHelper
 import javax.inject.Inject
@@ -95,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
     private val settingsCallback = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (appSettings.refreshRequired) loadRoms(false)
+        DocumentFileWatcher.startWatchingDirectory(DocumentFile.fromTreeUri(baseContext, Uri.parse(appSettings.searchLocation)))
     }
 
     private fun AppItem.toViewItem() = AppViewItem(layoutType, this, missingIcon, ::selectStartGame, ::selectShowGameDialog)
@@ -141,6 +143,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.stateData.observe(this, ::handleState)
         loadRoms(!appSettings.refreshRequired)
+        DocumentFileWatcher.registerCallbackOnFileChanged(::loadRoms)
+        DocumentFileWatcher.startWatchingDirectory(DocumentFile.fromTreeUri(baseContext, Uri.parse(appSettings.searchLocation)))
 
         binding.searchBar.apply {
             binding.logIcon.setOnClickListener {
@@ -300,7 +304,7 @@ class MainActivity : AppCompatActivity() {
         AppDialog.newInstance(appItem).show(supportFragmentManager, "game")
     }
 
-    private fun loadRoms(loadFromFile : Boolean) {
+    fun loadRoms(loadFromFile : Boolean) {
         viewModel.loadRoms(this, loadFromFile, Uri.parse(appSettings.searchLocation), EmulationSettings.global.systemLanguage)
         appSettings.refreshRequired = false
     }
