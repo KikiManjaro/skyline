@@ -11,12 +11,12 @@ import emu.skyline.loader.AppEntry
 import emu.skyline.loader.RomFormat
 import emu.skyline.utils.fromFile
 import emu.skyline.utils.toFile
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.HashMap
 
 sealed class MainState {
     object Loading : MainState()
@@ -70,6 +70,22 @@ class MainViewModel @Inject constructor(@ApplicationContext context : Context, p
                     Log.w(TAG, "Ran into exception while saving: ${e.message}")
                     MainState.Error(e)
                 }
+            }
+        }
+    }
+
+    /**
+     * This checks if the roms have changed since the last time they were loaded and if so it reloads them
+     */
+    fun checkRomHash(context : Context, searchLocation : Uri, systemLanguage : Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val oldHashFile = File(getApplication<SkylineApplication>().filesDir.canonicalPath + "/roms.txt")
+            val oldHash = if (oldHashFile.exists()) oldHashFile.readText().toIntOrNull() else null
+            val romElements = romProvider.loadRoms(searchLocation, systemLanguage).values.flatten().toList()
+            val newHash = romElements.map { it.name }.toSet().hashCode()
+            if (newHash != oldHash) {
+                loadRoms(context, false, searchLocation, systemLanguage)
+                oldHashFile.writeText(newHash.toString())
             }
         }
     }
