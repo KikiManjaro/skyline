@@ -77,15 +77,14 @@ class MainViewModel @Inject constructor(@ApplicationContext context : Context, p
     /**
      * This checks if the roms have changed since the last time they were loaded and if so it reloads them
      */
-    fun checkRomHash(context : Context, searchLocation : Uri, systemLanguage : Int) {
+    fun checkRomHash(searchLocation : Uri, systemLanguage : Int) {
+        if(state !is MainState.Loaded) return
         CoroutineScope(Dispatchers.IO).launch {
-            val oldHashFile = File(getApplication<SkylineApplication>().filesDir.canonicalPath + "/roms.txt")
-            val oldHash = if (oldHashFile.exists()) oldHashFile.readText().toIntOrNull() else null
-            val romElements = romProvider.loadRoms(searchLocation, systemLanguage).values.flatten().toList()
-            val newHash = romElements.map { it.name }.toSet().hashCode()
-            if (newHash != oldHash) {
-                loadRoms(context, false, searchLocation, systemLanguage)
-                oldHashFile.writeText(newHash.toString())
+            val currentHash = (state as MainState.Loaded).items.hashCode()
+            val romElements = romProvider.loadRoms(searchLocation, systemLanguage)
+            val newHash = romElements.hashCode()
+            if (newHash != currentHash) {
+                state = MainState.Loaded(romElements)
             }
         }
     }
