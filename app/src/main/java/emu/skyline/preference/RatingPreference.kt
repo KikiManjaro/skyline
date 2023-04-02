@@ -33,16 +33,16 @@ class RatingPreference @JvmOverloads constructor(context : Context, attrs : Attr
         entries = RATING_ORGANIZATIONS
         entryValues = RATING_ORGANIZATIONS.map { RATING_ORGANIZATIONS.indexOf(it).toString() }.toTypedArray()
 
-        value = context?.getSettings()?.ratingOrganization.toString()
+        value = context.getSettings().ratingOrganization.toString()
 
         onPreferenceChangeListener = OnPreferenceChangeListener { _, newValue ->
-            context?.getSettings()?.ratingOrganization = (newValue as String).toInt()
-            context?.getSettings()?.refreshRequired = true
+            context.getSettings().ratingOrganization = (newValue as String).toInt()
+            context.getSettings().refreshRequired = true
             true
         }
 
         summaryProvider = SummaryProvider<ListPreference> {
-            RATING_ORGANIZATIONS[context?.getSettings()?.ratingOrganization!!]
+            RATING_ORGANIZATIONS[context.getSettings().ratingOrganization]
         }
     }
 }
