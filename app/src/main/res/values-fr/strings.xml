@@ -42,6 +42,7 @@
     <string name="theme">Thème</string>
     <string name="app_language">Langue de l\'application</string>
     <string name="app_language_default">Utiliser Langue Système</string>
+    <string name="rating_organization">Organisme de Classification</string>
     <string name="layout_type">Mode d\'affichage des jeux</string>
     <string name="sort_apps_by">Ordre de tri des jeux</string>
     <string name="group_by_format">Grouper les jeux par format</string>

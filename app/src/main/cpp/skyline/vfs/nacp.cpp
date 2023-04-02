@@ -43,4 +43,10 @@ namespace skyline::vfs {
         auto applicationPublisher{span(nacpContents.titleEntries.at(static_cast<size_t>(language)).applicationPublisher)};
         return std::string(applicationPublisher.as_string(true));
     }
+
+    std::string NACP::GetRatingAge(rating_age_organization::NacpRatingAgeOrganization ratingAgeOrganization) {
+        int8_t age = *(((int8_t*)&(nacpContents.ratingAge)) + ratingAgeOrganization);
+        if (age < 0) age = 0;
+        return rating_age_organization::ratingAgeOrganizationStrings[ratingAgeOrganization] + " " + std::to_string(age);
+    }
 }

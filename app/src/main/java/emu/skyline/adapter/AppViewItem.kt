@@ -46,6 +46,8 @@ interface LayoutBinding<V : ViewBinding> : ViewBinding {
 
     val textVersion : TextView
 
+    val ratingAge : TextView
+
     val textAuthor : TextView
 
     val icon : ImageView
@@ -57,6 +59,8 @@ class ListBinding(parent : ViewGroup) : LayoutBinding<AppItemLinearBinding> {
     override val textTitle = binding.textTitle
 
     override val textVersion = binding.textVersion
+
+    override val ratingAge = binding.textVersion
 
     override val textAuthor = binding.textAuthor
 
@@ -70,6 +74,8 @@ class GridBinding(parent : ViewGroup) : LayoutBinding<AppItemGridBinding> {
 
     override val textVersion = binding.textVersion
 
+    override val ratingAge = binding.textVersion
+
     override val textAuthor = binding.textAuthor
 
     override val icon = binding.icon
@@ -81,6 +87,8 @@ class GridCompatBinding(parent : ViewGroup) : LayoutBinding<AppItemGridCompactBi
     override val textTitle = binding.textTitle
 
     override val textVersion = binding.textVersion
+
+    override val ratingAge = binding.textVersion
 
     override val textAuthor = binding.textAuthor
 

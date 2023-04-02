@@ -247,7 +247,7 @@ class EmulationActivity : AppCompatActivity(), SurfaceHolder.Callback, View.OnTo
         // The intent did not contain an app item, fall back to the data URI
         val uri = intent.data!!
         val romFormat = getRomFormat(uri, contentResolver)
-        val romFile = RomFile(this, romFormat, uri, EmulationSettings.global.systemLanguage)
+        val romFile = RomFile(this, romFormat, uri, EmulationSettings.global.systemLanguage, appSettings.ratingOrganization)
 
         item = AppItem(romFile.takeIf { it.valid }!!.appEntry)
     }

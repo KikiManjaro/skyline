@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Questo dispositivo non supporta i driver personalizzati</string>
     <string name="app_language">Lingua App</string>
     <string name="app_language_default">Usa Predefinito di Sistema</string>
+    <string name="rating_organization">Valutazione Organizzazione</string>
     <!-- Settings - System -->
     <string name="system">Sistema</string>
     <string name="use_docked">Utilizza la modalità console fissa</string>

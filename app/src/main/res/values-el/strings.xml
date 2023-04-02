@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Η συσκευή σου δεν υποστηρίζει προσαρμοσμένους οδηγούς</string>
     <string name="app_language">Γλώσσα εφαρμογής</string>
     <string name="app_language_default">Χρησιμοποιήστε την προεπιλογή συστήματος</string>
+    <string name="rating_organization">Οργανισμός αξιολόγησης</string>
     <!-- Settings - System -->
     <string name="system">Σύστημα</string>
     <string name="use_docked">Χρησιμοποίησε λειτουργία σύνδεσης</string>

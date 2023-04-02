@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">장치가 사용자 정의 드라이버를 지원하지 않습니다</string>
     <string name="app_language">앱 언어</string>
     <string name="app_language_default">시스템 기본값 사용</string>
+    <string name="rating_organization">평가 조직</string>
     <!-- Settings - System -->
     <string name="system">체계</string>
     <string name="use_docked">도킹 모드 사용</string>

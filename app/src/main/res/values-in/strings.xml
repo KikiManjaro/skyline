@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Perangkat kamu tidak mendukung custom driver</string>
     <string name="app_language">Bahasa Aplikasi</string>
     <string name="app_language_default">Gunakan Bawaan Sistem</string>
+    <string name="rating_organization">Organisasi Pemeringkatan</string>
     <!-- Settings - System -->
     <string name="system">Sistem</string>
     <string name="use_docked">Gunakan Mode Docked</string>

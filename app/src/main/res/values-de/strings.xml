@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Dein Gerät unterstützt keine anderen Treiber</string>
     <string name="app_language">App-Sprache</string>
     <string name="app_language_default">Verwende Systemsprache</string>
+    <string name="rating_organization">Bewertung Organisation</string>
     <!-- Settings - System -->
     <string name="system">System</string>
     <string name="use_docked">Verwende Docked Modus</string>

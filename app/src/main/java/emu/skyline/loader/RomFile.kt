@@ -66,6 +66,7 @@ enum class LoaderResult(val value : Int) {
 data class AppEntry(
     var name : String,
     var version : String?,
+    var ratingAge : String?,
     var titleId : String?,
     var author : String?,
     var icon : Bitmap?,
@@ -77,7 +78,7 @@ data class AppEntry(
         val nameIndex : Int = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
         cursor.moveToFirst()
         cursor.getString(nameIndex)
-    }!!.dropLast(format.name.length + 1), null, null, null, null, format, uri, loaderResult)
+    }!!.dropLast(format.name.length + 1), null, null, null, null, null, format, uri, loaderResult)
 
     private fun writeObject(output : ObjectOutputStream) {
         output.writeUTF(name)
@@ -86,6 +87,9 @@ data class AppEntry(
         output.writeBoolean(version != null)
         if (version != null)
             output.writeUTF(version)
+        output.writeBoolean(ratingAge != null)
+        if (ratingAge != null)
+            output.writeUTF(ratingAge)
         output.writeBoolean(titleId != null)
         if (titleId != null)
             output.writeUTF(titleId)
@@ -110,6 +114,8 @@ data class AppEntry(
         if (input.readBoolean())
             version = input.readUTF()
         if (input.readBoolean())
+            ratingAge = input.readUTF()
+        if (input.readBoolean())
             titleId = input.readUTF()
         if (input.readBoolean())
             author = input.readUTF()
@@ -129,7 +135,7 @@ data class AppEntry(
 /**
  * This class is used as interface between libskyline and Kotlin for loaders
  */
-internal class RomFile(context : Context, format : RomFormat, uri : Uri, systemLanguage : Int) {
+internal class RomFile(context : Context, format : RomFormat, uri : Uri, systemLanguage : Int, ratingOrganization : Int) {
     /**
      * @note This field is filled in by native code
      */
@@ -144,6 +150,11 @@ internal class RomFile(context : Context, format : RomFormat, uri : Uri, systemL
      * @note This field is filled in by native code
      */
     private var applicationVersion : String? = null
+
+    /**
+     * @note This field is filled in by native code
+     */
+    private var applicationRatingAge : String? = null
 
     /**
      * @note This field is filled in by native code
@@ -164,15 +175,17 @@ internal class RomFile(context : Context, format : RomFormat, uri : Uri, systemL
 
     init {
         context.contentResolver.openFileDescriptor(uri, "r")!!.use {
-            result = LoaderResult.get(populate(format.ordinal, it.fd, "${context.filesDir.canonicalPath}/keys/", systemLanguage))
+            result = LoaderResult.get(populate(format.ordinal, it.fd, "${context.filesDir.canonicalPath}/keys/", systemLanguage, ratingOrganization))
         }
 
         appEntry = applicationName?.let { name ->
             applicationVersion?.let { version ->
-                applicationTitleId?.let { titleId ->
-                    applicationAuthor?.let { author ->
-                        rawIcon?.let { icon ->
-                            AppEntry(name, version, titleId, author, BitmapFactory.decodeByteArray(icon, 0, icon.size), format, uri, result)
+                applicationRatingAge?.let { ratingAge ->
+                    applicationTitleId?.let { titleId ->
+                        applicationAuthor?.let { author ->
+                            rawIcon?.let { icon ->
+                                AppEntry(name, version, ratingAge, titleId, author, BitmapFactory.decodeByteArray(icon, 0, icon.size), format, uri, result)
+                            }
                         }
                     }
                 }
@@ -187,5 +200,5 @@ internal class RomFile(context : Context, format : RomFormat, uri : Uri, systemL
      * @param appFilesPath Path to internal app data storage, needed to read imported keys
      * @return A pointer to the newly allocated object, or 0 if the ROM is invalid
      */
-    private external fun populate(format : Int, romFd : Int, appFilesPath : String, systemLanguage : Int) : Int
+    private external fun populate(format : Int, romFd : Int, appFilesPath : String, systemLanguage : Int, prefRatingOrganization : Int) : Int
 }

@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Twoje urządzenie nie wspiera wymiennych sterowników</string>
     <string name="app_language">Język aplikacji</string>
     <string name="app_language_default">Użyj ustawienia domyślne systemu</string>
+    <string name="rating_organization">Ocena Organizacja</string>
     <!-- Settings - System -->
     <string name="system">System</string>
     <string name="use_docked">Użyj trybu Dokowania</string>

@@ -12,7 +12,7 @@
 #include "skyline/loader/nsp.h"
 #include "skyline/jvm.h"
 
-extern "C" JNIEXPORT jint JNICALL Java_emu_skyline_loader_RomFile_populate(JNIEnv *env, jobject thiz, jint jformat, jint fd, jstring appFilesPathJstring, jint systemLanguage) {
+extern "C" JNIEXPORT jint JNICALL Java_emu_skyline_loader_RomFile_populate(JNIEnv *env, jobject thiz, jint jformat, jint fd, jstring appFilesPathJstring, jint systemLanguage, jint prefRatingOrganization) {
     skyline::signal::ScopedStackBlocker stackBlocker;
 
     skyline::loader::RomFormat format{static_cast<skyline::loader::RomFormat>(jformat)};
@@ -55,6 +55,7 @@ extern "C" JNIEXPORT jint JNICALL Java_emu_skyline_loader_RomFile_populate(JNIEn
     jfieldID applicationAuthorField{env->GetFieldID(clazz, "applicationAuthor", "Ljava/lang/String;")};
     jfieldID rawIconField{env->GetFieldID(clazz, "rawIcon", "[B")};
     jfieldID applicationVersionField{env->GetFieldID(clazz, "applicationVersion", "Ljava/lang/String;")};
+    jfieldID applicationRatingAgeField{env->GetFieldID(clazz, "applicationRatingAge", "Ljava/lang/String;")};
 
     if (loader->nacp) {
         auto language{skyline::language::GetApplicationLanguage(static_cast<skyline::language::SystemLanguage>(systemLanguage))};
@@ -65,6 +66,10 @@ extern "C" JNIEXPORT jint JNICALL Java_emu_skyline_loader_RomFile_populate(JNIEn
         env->SetObjectField(thiz, applicationVersionField, env->NewStringUTF(loader->nacp->GetApplicationVersion().c_str()));
         env->SetObjectField(thiz, applicationTitleIdField, env->NewStringUTF(loader->nacp->GetSaveDataOwnerId().c_str()));
         env->SetObjectField(thiz, applicationAuthorField, env->NewStringUTF(loader->nacp->GetApplicationPublisher(language).c_str()));
+
+
+        auto ratingOrganization{skyline::rating_age_organization::NacpRatingAgeOrganization(prefRatingOrganization)};
+        env->SetObjectField(thiz, applicationRatingAgeField, env->NewStringUTF(loader->nacp->GetRatingAge(ratingOrganization).c_str()));
 
         auto icon{loader->GetIcon(language)};
         jbyteArray iconByteArray{env->NewByteArray(static_cast<jsize>(icon.size()))};

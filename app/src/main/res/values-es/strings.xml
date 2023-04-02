@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Tu dispositivo no soporta drivers personalizados </string>
     <string name="app_language">Idioma de la aplicación</string>
     <string name="app_language_default">Usar idioma del sistema</string>
+    <string name="rating_organization">Clasificación Organización</string>
     <!-- Settings - System -->
     <string name="system">Sistema</string>
     <string name="use_docked">Usar Modo Dock</string>

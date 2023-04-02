@@ -54,6 +54,11 @@ data class AppItem(private val meta : AppEntry) : DataItem() {
     val version get() = meta.version
 
     /**
+     * The application rating age
+     */
+    val ratingAge get() = meta.ratingAge
+
+    /**
      * The application author
      */
     val author get() = meta.author

@@ -38,6 +38,10 @@
             app:key="app_language"
             app:persistent="false"
             app:title="@string/app_language" />
+        <emu.skyline.preference.RatingPreference
+            app:key="rating_organization"
+            app:persistent="false"
+            app:title="@string/rating_organization" />
         <emu.skyline.preference.IntegerListPreference
             android:defaultValue="1"
             android:entries="@array/layout_type"

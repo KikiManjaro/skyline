@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Az eszközöd nem támogatja az egyedi illesztőprogramokat</string>
     <string name="app_language">Alkalmazás nyelve</string>
     <string name="app_language_default">A rendszer alapértelmezés használata</string>
+    <string name="rating_organization">Értékelő szervezet</string>
     <!-- Settings - System -->
     <string name="system">Rendszer</string>
     <string name="use_docked">Dokkolt mód használata</string>

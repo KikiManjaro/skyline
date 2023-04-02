@@ -23,11 +23,30 @@ namespace skyline::vfs {
         static_assert(sizeof(ApplicationTitle) == 0x300);
 
       public:
+        struct NacpRatingAge {
+            int8_t cero;
+            int8_t grac_gcrb;
+            int8_t gsrmr;
+            int8_t esrb;
+            int8_t class_ind;
+            int8_t usk;
+            int8_t pegi;
+            int8_t pegi_portugal;
+            int8_t pegi_bbfc;
+            int8_t russian;
+            int8_t acb;
+            int8_t oflc;
+            int8_t iarc_generic;
+            int8_t reserved[0x13];
+        };
+        static_assert(sizeof(NacpRatingAge) == 0x20);
+
         struct NacpData {
             std::array<ApplicationTitle, 0x10> titleEntries; //!< Title entries for each language
             u8 _pad0_[0x2C];
             u32 supportedLanguageFlag; //!< A bitmask containing the game's supported languages
-            u8 _pad1_[0x30];
+            u8 _pad5_[0x10];
+            NacpRatingAge ratingAge; //!< The rating age of the application
             std::array<char, 0x10> displayVersion; //!< The user-readable version of the application
             u8 _pad4_[0x8];
             u64 saveDataOwnerId; //!< The ID that should be used for this application's savedata
@@ -52,5 +71,7 @@ namespace skyline::vfs {
         std::string GetSaveDataOwnerId();
 
         std::string GetApplicationPublisher(language::ApplicationLanguage language);
+
+        std::string GetRatingAge(rating_age_organization::NacpRatingAgeOrganization ratingAgeOrganization);
     };
 }

@@ -41,7 +41,7 @@ class MainViewModel @Inject constructor(@ApplicationContext context : Context, p
      *
      * @param loadFromFile If this is false then trying to load cached adapter data is skipped entirely
      */
-    fun loadRoms(context : Context, loadFromFile : Boolean, searchLocation : Uri, systemLanguage : Int) {
+    fun loadRoms(context : Context, loadFromFile : Boolean, searchLocation : Uri, systemLanguage : Int, ratingOrganization : Int) {
         if (state == MainState.Loading) return
         state = MainState.Loading
 
@@ -63,7 +63,7 @@ class MainViewModel @Inject constructor(@ApplicationContext context : Context, p
             } else {
                 try {
                     KeyReader.importFromLocation(context, searchLocation)
-                    val romElements = romProvider.loadRoms(searchLocation, systemLanguage)
+                    val romElements = romProvider.loadRoms(searchLocation, systemLanguage, ratingOrganization)
                     romElements.toFile(romsFile)
                     MainState.Loaded(romElements)
                 } catch (e : Exception) {

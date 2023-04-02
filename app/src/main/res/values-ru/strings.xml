@@ -48,6 +48,7 @@
     <string name="gpu_driver_config_desc_unsupported">Ваше устройство не поддерживает пользовательские драйвера</string>
     <string name="app_language">Язык приложения</string>
     <string name="app_language_default">Использовать значение системы</string>
+    <string name="rating_organization">Рейтинговая организация</string>
     <!-- Settings - System -->
     <string name="system">Система</string>
     <string name="use_docked">Использовать режим док-станции</string>

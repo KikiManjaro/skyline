@@ -155,4 +155,47 @@ namespace skyline {
             }
         }
     }
+
+    namespace rating_age_organization {
+
+        const int NacpRatingAgeOrganization_Count = 13;
+
+        /**
+        * @brief Returns the display name of the rating organization from the given index
+        */
+        static const std::string ratingAgeOrganizationStrings[NacpRatingAgeOrganization_Count] = {
+            "CERO",
+            "GRACGCRB",
+            "GSRMR",
+            "ESRB",
+            "ClassInd",
+            "USK",
+            "PEGI",
+            "PEGIPortugal",
+            "PEGIBBFC",
+            "Russian",
+            "ACB",
+            "OFLC",
+            "IARCGeneric"
+        };
+
+        /**
+        * @brief An enum of all rating organizations and the associated index
+        */
+        typedef enum {
+            NacpRatingAgeOrganization_CERO         = 0,
+            NacpRatingAgeOrganization_GRACGCRB     = 1,
+            NacpRatingAgeOrganization_GSRMR        = 2,
+            NacpRatingAgeOrganization_ESRB         = 3,
+            NacpRatingAgeOrganization_ClassInd     = 4,
+            NacpRatingAgeOrganization_USK          = 5,
+            NacpRatingAgeOrganization_PEGI         = 6,
+            NacpRatingAgeOrganization_PEGIPortugal = 7,
+            NacpRatingAgeOrganization_PEGIBBFC     = 8,
+            NacpRatingAgeOrganization_Russian      = 9,
+            NacpRatingAgeOrganization_ACB          = 10,
+            NacpRatingAgeOrganization_OFLC         = 11,
+            NacpRatingAgeOrganization_IARCGeneric  = 12,
+        } NacpRatingAgeOrganization;
+    }
 }

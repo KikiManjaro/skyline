@@ -73,12 +73,24 @@
                 tools:text="1.0.0" />
 
             <TextView
-                android:id="@+id/game_author"
+                android:id="@+id/game_rating"
                 style="?attr/textAppearanceBodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/game_version"
                 app:layout_constraintTop_toBottomOf="@id/game_version"
+                tools:text="" />
+
+            <TextView
+                android:id="@+id/game_author"
+                style="?attr/textAppearanceBodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="@android:color/tertiary_text_light"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/game_rating"
+                app:layout_constraintTop_toBottomOf="@id/game_rating"
                 tools:text="Nintendo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
