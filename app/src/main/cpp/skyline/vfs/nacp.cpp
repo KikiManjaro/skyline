@@ -30,8 +30,8 @@ namespace skyline::vfs {
     }
 
     std::string NACP::GetApplicationVersion() {
-        auto applicationPublisher{span(nacpContents.displayVersion)};
-        return std::string(applicationPublisher.as_string(true));
+        auto applicationVersion{span(nacpContents.displayVersion)};
+        return std::string(applicationVersion.as_string(true));
     }
 
     std::string NACP::GetSaveDataOwnerId() {
